@@ -1,0 +1,42 @@
+
+
+digraph compiler 
+{
+    rankdir = LR
+    edge [shape = "curve", colorscheme = oranges9, color = 6]
+    node [shape = record, colorscheme = oranges9, color = 3]
+
+    subgraph cluster_front
+    { 
+      style = filled
+      label = "front-end"
+      node [shape = Mrecord, style=filled, fillcolor = 3]
+      "tokenizer + lexer"
+    }  
+
+    subgraph cluster_middle
+    { 
+      style = filled
+      label = "middle-end"
+      node [shape = Mrecord, style=filled, fillcolor = 3]
+      "LLVM optimizer"
+    }
+    subgraph cluster_back
+    { 
+      style = filled
+      label = "back-end"
+      node [shape = Mrecord, style=filled, fillcolor = 3]
+      "my IR compiler"
+    }  
+
+    "mypy" [label = "mypy", style = invis]
+    "mypy" -> "tokenizer + lexer" [label = "*.mypy"]
+
+    "tokenizer + lexer" -> "LLVM optimizer" [label="LLVM IR"];
+    "LLVM optimizer" -> "my IR compiler" [label="LLVM IR"];
+
+    "end" [style = invis]
+    "my IR compiler" -> "end" [label = "x86_64"]
+
+}
+

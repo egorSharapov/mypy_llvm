@@ -1,0 +1,89 @@
+digraph compiler 
+{
+    node [colorscheme = oranges9]
+    subgraph cluster_front
+    { 
+        style = filled
+        label = "Module"
+    
+        subgraph cluster_y
+        { 
+            style = filled
+            colorscheme = oranges9
+            fillcolor = 1
+            style = filled
+            label = "Global variables"
+            node [shape = Mrecord, style=filled, fillcolor = 4]
+            "global var"
+        }
+        subgraph cluster_z
+        { 
+            style = filled
+            colorscheme = oranges9
+            fillcolor = 1
+            rankdir = LR
+            style = filled
+            label = "Function"
+            node [group = 1,shape = Mrecord, style=filled, fillcolor = 4]
+            instr5 [label = "Instruction"]
+            instr6 [label = "Instruction"]
+
+            instr5 -> instr6
+
+
+            subgraph cluster_z
+            { 
+            style = filled
+            colorscheme = oranges9
+            fillcolor = 2
+                rankdir = TB
+                style = filled
+                label = "Basic block"
+                node [group = 1,shape = Mrecord, style=filled, fillcolor = 4]
+                instr5 [label = "Instruction"]
+                instr6 [label = "Instruction"]
+
+            }
+        }
+        subgraph cluster_x
+        { 
+            style = filled
+            colorscheme = oranges9
+            fillcolor = 1
+            label = "Function"
+            node [group=1, shape = Mrecord, style=filled, fillcolor = 4]
+            instr1 [label = "Instruction", rank = same]
+            instr2 [label = "Instruction", rank = same]
+            instr3 [label = "Instruction", rank = same]
+            instr4 [label = "Instruction", rank = same]
+
+            instr1 -> instr2 -> instr4 -> instr3 
+            instr2 -> instr6
+
+            subgraph cluster_b
+            { 
+                style = filled
+                colorscheme = oranges9
+                fillcolor = 2
+                label = "Basic block"
+                node [group = 1,shape = Mrecord, style=filled, fillcolor = 4]
+                instr3 [label = "Instruction"]
+            }
+            subgraph cluster_a
+            { 
+                style = filled
+                colorscheme = oranges9
+                fillcolor = 2
+                style = filled
+                label = "Basic block"
+                node [group = 1,shape = Mrecord, style=filled, fillcolor = 3]
+                instr1 [label = "Instruction"]
+                instr2 [label = "Instruction"]
+                instr4 [label = "Instruction"]
+            }
+        }
+
+    }  
+
+}
+
