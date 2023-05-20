@@ -141,6 +141,7 @@ typedef struct
 {
     LLVMValueRef value;
     enum Regs reg;
+    size_t uses;
 } Fixup_node;
 ```
 Каждой инструкции `IR` присваевается свой реальный регистр, затем инструкция компилируется в нативный код.
